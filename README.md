@@ -1,6 +1,6 @@
 # IFC Knowledge Graph (FastAPI + HTML)
 
-This app reads a file called 'project.ifc' placed in the root directory and creates a browser-based knowledge graph using sigma.js.
+This app reads a file called 'project.ifc' placed in the root directory and creates a browser-based knowledge graph using sigma.js (https://www.sigmajs.org/).
 
 ## 1) Install dependencies
 
