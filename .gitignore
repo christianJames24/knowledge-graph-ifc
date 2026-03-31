@@ -1,1 +1,3 @@
 project.ifc
+__pycache__/
+*pycache*/
