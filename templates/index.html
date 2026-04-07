@@ -755,6 +755,14 @@
           return set;
         };
 
+        const focusCameraOnNode = (node, duration = 400) => {
+          const { x, y } = graph.getNodeAttributes(node);
+          const camera = renderer.getCamera();
+          const currentRatio = camera.getState().ratio || 1;
+          const nextRatio = Math.max(0.38, Math.min(currentRatio * 0.82, 0.9));
+          camera.animate({ x, y, ratio: nextRatio }, { duration });
+        };
+
         const updateDetailPanel = () => {
           const focusNode = selectedNode || hoveredNode;
           $("detail-panel").classList.toggle("is-pinned", Boolean(selectedNode));
@@ -903,10 +911,6 @@
 
         renderer.on("clickNode", ({ node }) => {
           selectedNode = selectedNode === node ? null : node;
-          if (selectedNode) {
-            const { x, y } = graph.getNodeAttributes(selectedNode);
-            renderer.getCamera().animate({ x, y, ratio: 0.12 }, { duration: 350 });
-          }
           updateReducers();
         });
 
@@ -937,8 +941,7 @@
           updateReducers();
 
           if (firstMatch) {
-            const { x, y } = graph.getNodeAttributes(firstMatch);
-            renderer.getCamera().animate({ x, y, ratio: 0.08 }, { duration: 500 });
+            focusCameraOnNode(firstMatch, 500);
           }
         });
 
