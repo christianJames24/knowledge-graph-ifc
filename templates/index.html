@@ -14,7 +14,8 @@
         --bg: #f3f6fb;
         --surface: #ffffff;
         --surface-2: #e8eef7;
-        --border: rgba(15,23,42,0.12);
+        --border: rgba(15, 23, 42, 0.12);
+        --shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
         --ink: #1f2937;
         --ink-muted: #64748b;
         --accent: #58a6ff;
@@ -22,7 +23,13 @@
         --accent-3: #d2a8ff;
         --danger: #f85149;
       }
-      * { box-sizing: border-box; margin: 0; padding: 0; }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
       body {
         font-family: "DM Sans", sans-serif;
         background: var(--bg);
@@ -32,6 +39,7 @@
         grid-template-rows: 52px 1fr;
         overflow: hidden;
       }
+
       header {
         display: flex;
         align-items: center;
@@ -41,6 +49,7 @@
         background: var(--surface);
         z-index: 10;
       }
+
       .logo {
         font-family: "IBM Plex Mono", monospace;
         font-weight: 600;
@@ -49,8 +58,19 @@
         color: var(--accent);
         white-space: nowrap;
       }
-      .logo span { color: var(--ink-muted); font-weight: 400; }
-      .divider { width: 1px; height: 22px; background: var(--border); flex-shrink: 0; }
+
+      .logo span {
+        color: var(--ink-muted);
+        font-weight: 400;
+      }
+
+      .divider {
+        width: 1px;
+        height: 22px;
+        background: var(--border);
+        flex-shrink: 0;
+      }
+
       #stats {
         font-size: 0.78rem;
         font-family: "IBM Plex Mono", monospace;
@@ -59,19 +79,44 @@
         gap: 1rem;
         flex-wrap: wrap;
       }
-      #stats .pill { display: inline-flex; align-items: center; gap: 0.35rem; }
+
+      #stats .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+
       #stats .pill::before {
         content: "";
         display: inline-block;
-        width: 6px; height: 6px;
+        width: 6px;
+        height: 6px;
         border-radius: 50%;
         background: var(--accent);
       }
-      #stats .pill.edges::before { background: var(--accent-2); }
-      #stats .pill.timing::before { background: var(--accent-3); }
-      #stats .pill.cache::before { background: var(--ink-muted); }
-      .spacer { flex: 1; }
-      .search-wrap { position: relative; display: flex; align-items: center; }
+
+      #stats .pill.edges::before {
+        background: var(--accent-2);
+      }
+
+      #stats .pill.timing::before {
+        background: var(--accent-3);
+      }
+
+      #stats .pill.cache::before {
+        background: var(--ink-muted);
+      }
+
+      .spacer {
+        flex: 1;
+      }
+
+      .search-wrap {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
       #search {
         background: var(--surface-2);
         border: 1px solid var(--border);
@@ -84,10 +129,29 @@
         outline: none;
         transition: border-color 200ms, width 200ms;
       }
-      #search:focus { border-color: var(--accent); width: 260px; }
-      #search::placeholder { color: var(--ink-muted); }
-      .search-icon { position: absolute; left: 0.55rem; pointer-events: none; color: var(--ink-muted); font-size: 0.8rem; }
-      .controls { display: flex; gap: 0.4rem; }
+
+      #search:focus {
+        border-color: var(--accent);
+        width: 260px;
+      }
+
+      #search::placeholder {
+        color: var(--ink-muted);
+      }
+
+      .search-icon {
+        position: absolute;
+        left: 0.55rem;
+        pointer-events: none;
+        color: var(--ink-muted);
+        font-size: 0.8rem;
+      }
+
+      .controls {
+        display: flex;
+        gap: 0.4rem;
+      }
+
       .btn {
         background: var(--surface-2);
         border: 1px solid var(--border);
@@ -95,38 +159,96 @@
         color: var(--ink-muted);
         cursor: pointer;
         font-size: 1rem;
-        width: 30px; height: 30px;
-        display: flex; align-items: center; justify-content: center;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         transition: color 150ms, border-color 150ms, background 150ms;
         line-height: 1;
       }
-      .btn:hover { color: var(--ink); border-color: rgba(255,255,255,0.2); background: var(--surface); }
-      .btn.active { color: var(--accent); border-color: var(--accent); }
-      #sigma-container { position: relative; width: 100%; height: 100%; overflow: hidden; }
-      #sigma-container canvas { display: block; }
+
+      .btn:hover {
+        color: var(--ink);
+        border-color: rgba(255, 255, 255, 0.2);
+        background: var(--surface);
+      }
+
+      .btn.active {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+
+      #sigma-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      #sigma-container canvas {
+        display: block;
+      }
+
       #loading {
-        position: absolute; inset: 0;
-        display: flex; flex-direction: column;
-        align-items: center; justify-content: center;
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         gap: 1rem;
         background: var(--bg);
         z-index: 5;
         transition: opacity 400ms;
       }
-      #loading.hidden { opacity: 0; pointer-events: none; }
+
+      #loading.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
       .spinner {
-        width: 38px; height: 38px;
+        width: 38px;
+        height: 38px;
         border: 2px solid var(--border);
         border-top-color: var(--accent);
         border-radius: 50%;
         animation: spin 700ms linear infinite;
       }
-      @keyframes spin { to { transform: rotate(360deg); } }
-      #loading-msg { font-family: "IBM Plex Mono", monospace; font-size: 0.8rem; color: var(--ink-muted); }
-      #loading-bar-wrap { width: 220px; height: 3px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
-      #loading-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 99px; transition: width 300ms ease; }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      #loading-msg {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.8rem;
+        color: var(--ink-muted);
+      }
+
+      #loading-bar-wrap {
+        width: 220px;
+        height: 3px;
+        background: var(--surface-2);
+        border-radius: 99px;
+        overflow: hidden;
+      }
+
+      #loading-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        border-radius: 99px;
+        transition: width 300ms ease;
+      }
+
       #legend {
-        position: absolute; bottom: 1rem; left: 1rem;
+        position: absolute;
+        bottom: 1rem;
+        left: 1rem;
         background: var(--surface);
         border: 1px solid var(--border);
         border-radius: 8px;
@@ -135,6 +257,7 @@
         z-index: 10;
         min-width: 130px;
       }
+
       #legend .leg-title {
         font-family: "IBM Plex Mono", monospace;
         font-size: 0.68rem;
@@ -143,54 +266,240 @@
         letter-spacing: 0.08em;
         margin-bottom: 0.45rem;
       }
-      .leg-item { display: flex; align-items: center; gap: 0.45rem; margin-bottom: 0.3rem; color: var(--ink-muted); }
-      .leg-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-      .zoom-controls { position: absolute; bottom: 1rem; right: 1rem; display: flex; flex-direction: column; gap: 0.3rem; z-index: 10; }
-      .zoom-controls .btn { width: 34px; height: 34px; font-size: 1.2rem; background: var(--surface); }
+
+      .leg-item {
+        display: flex;
+        align-items: center;
+        gap: 0.45rem;
+        margin-bottom: 0.3rem;
+        color: var(--ink-muted);
+      }
+
+      .leg-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        flex-shrink: 0;
+      }
+
+      .zoom-controls {
+        position: absolute;
+        bottom: 1rem;
+        right: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        z-index: 10;
+      }
+
+      .zoom-controls .btn {
+        width: 34px;
+        height: 34px;
+        font-size: 1.2rem;
+        background: var(--surface);
+      }
+
+      #detail-panel {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: min(320px, calc(100vw - 2rem));
+        max-height: calc(100% - 2rem);
+        overflow: auto;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(10px);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        padding: 0.85rem 0.95rem;
+        z-index: 10;
+      }
+
+      #detail-panel.is-pinned {
+        border-color: rgba(88, 166, 255, 0.45);
+      }
+
+      .detail-kicker {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0.6rem;
+        margin-bottom: 0.55rem;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.68rem;
+        color: var(--ink-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      .detail-kicker strong {
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      #detail-title {
+        font-size: 0.96rem;
+        font-weight: 700;
+        line-height: 1.35;
+        margin-bottom: 0.22rem;
+        color: var(--ink);
+      }
+
+      #detail-subtitle {
+        font-size: 0.76rem;
+        color: var(--ink-muted);
+        margin-bottom: 0.7rem;
+      }
+
+      #detail-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.38rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .meta-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.3rem;
+        padding: 0.22rem 0.5rem;
+        border-radius: 999px;
+        background: var(--surface-2);
+        font-size: 0.7rem;
+        color: var(--ink-muted);
+      }
+
+      #detail-body {
+        display: grid;
+        gap: 0.75rem;
+      }
+
+      .detail-section {
+        border-top: 1px solid rgba(15, 23, 42, 0.08);
+        padding-top: 0.65rem;
+      }
+
+      .detail-section:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+
+      .detail-section-title {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 0.68rem;
+        color: var(--ink-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        margin-bottom: 0.42rem;
+      }
+
+      .detail-line {
+        font-size: 0.77rem;
+        line-height: 1.45;
+        color: var(--ink);
+      }
+
+      .neighbor-list {
+        display: grid;
+        gap: 0.35rem;
+      }
+
+      .neighbor-item {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.65rem;
+        font-size: 0.75rem;
+        color: var(--ink);
+      }
+
+      .neighbor-item span:last-child {
+        color: var(--ink-muted);
+        text-align: right;
+      }
+
       #error-msg {
-        position: absolute; inset: 0;
-        display: none; flex-direction: column;
-        align-items: center; justify-content: center;
+        position: absolute;
+        inset: 0;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
         gap: 0.75rem;
         color: var(--danger);
         font-size: 0.9rem;
         font-family: "IBM Plex Mono", monospace;
       }
-      #error-msg.visible { display: flex; }
+
+      #error-msg.visible {
+        display: flex;
+      }
+
+      @media (max-width: 920px) {
+        #detail-panel {
+          top: auto;
+          right: 1rem;
+          left: 1rem;
+          bottom: 5rem;
+          width: auto;
+          max-height: min(42vh, 320px);
+        }
+
+        #legend {
+          max-width: calc(100vw - 2rem);
+        }
+      }
     </style>
   </head>
   <body>
     <header>
       <div class="logo">IFC<span>/</span>KG</div>
       <div class="divider"></div>
-      <div id="stats"><span class="pill">Loading…</span></div>
+      <div id="stats"><span class="pill">Loading...</span></div>
       <div class="spacer"></div>
       <div class="search-wrap">
-        <span class="search-icon">⌕</span>
-        <input id="search" type="text" placeholder="Search nodes…" autocomplete="off" />
+        <span class="search-icon">&#8981;</span>
+        <input id="search" type="text" placeholder="Search nodes..." autocomplete="off" />
       </div>
       <div class="controls">
-        <button class="btn" id="btn-labels" title="Toggle labels">𝕃</button>
-        <button class="btn active" id="btn-edges" title="Toggle edges">⇌</button>
-        <button class="btn" id="btn-fit" title="Fit to screen">⊡</button>
+        <button class="btn" id="btn-labels" title="Toggle labels">L</button>
+        <button class="btn active" id="btn-edges" title="Toggle edges">&#8646;</button>
+        <button class="btn" id="btn-fit" title="Fit to screen">&#8862;</button>
       </div>
     </header>
 
     <div id="sigma-container">
       <div id="loading">
         <div class="spinner"></div>
-        <div id="loading-msg">Fetching graph data…</div>
+        <div id="loading-msg">Fetching graph data...</div>
         <div id="loading-bar-wrap"><div id="loading-bar"></div></div>
       </div>
-      <div id="error-msg"><span>✕</span><span id="error-text">Could not load graph data.</span></div>
+      <div id="error-msg"><span>&times;</span><span id="error-text">Could not load graph data.</span></div>
+      <div id="detail-panel">
+        <div class="detail-kicker">
+          <strong id="detail-state">Inspect</strong>
+          <span id="detail-hint">Hover or click a node</span>
+        </div>
+        <div id="detail-title">Graph overview</div>
+        <div id="detail-subtitle">The graph keeps all nodes and edges, but surfaces details only when you focus a node.</div>
+        <div id="detail-meta">
+          <span class="meta-chip">Less label overlap</span>
+          <span class="meta-chip">Hub edges softened</span>
+        </div>
+        <div id="detail-body">
+          <div class="detail-section">
+            <div class="detail-section-title">How To Read</div>
+            <div class="detail-line">Hover to preview a local neighborhood. Click to pin it. Search jumps to the first match and highlights all matches.</div>
+          </div>
+        </div>
+      </div>
       <div id="legend">
         <div class="leg-title">Node Types</div>
         <div id="legend-items"></div>
       </div>
       <div class="zoom-controls">
         <button class="btn" id="zoom-in" title="Zoom in">+</button>
-        <button class="btn" id="zoom-reset" title="Reset zoom">○</button>
-        <button class="btn" id="zoom-out" title="Zoom out">−</button>
+        <button class="btn" id="zoom-reset" title="Reset zoom">&#9711;</button>
+        <button class="btn" id="zoom-out" title="Zoom out">&minus;</button>
       </div>
     </div>
 
@@ -200,295 +509,467 @@
     <script src="https://cdn.jsdelivr.net/npm/sigma@2.4.0/build/sigma.min.js"></script>
 
     <script>
-    (async () => {
-      const $ = id => document.getElementById(id);
-      const setProgress = (pct, msg) => {
-        $("loading-bar").style.width = pct + "%";
-        if (msg) $("loading-msg").textContent = msg;
-      };
-      const showError = msg => {
-        $("loading").classList.add("hidden");
-        $("error-text").textContent = msg;
-        $("error-msg").classList.add("visible");
-      };
+      (async () => {
+        const $ = id => document.getElementById(id);
+        const escapeHtml = value => String(value ?? "")
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+        const hashString = value => {
+          let hash = 0;
+          for (let i = 0; i < value.length; i += 1) {
+            hash = (hash * 31 + value.charCodeAt(i)) >>> 0;
+          }
+          return hash;
+        };
+        const setProgress = (pct, msg) => {
+          $("loading-bar").style.width = pct + "%";
+          if (msg) $("loading-msg").textContent = msg;
+        };
+        const showError = msg => {
+          $("loading").classList.add("hidden");
+          $("error-text").textContent = msg;
+          $("error-msg").classList.add("visible");
+        };
 
-      const PALETTE = [
-        "#58a6ff","#3fb950","#d2a8ff","#ffa657","#ff7b72",
-        "#79c0ff","#56d364","#bc8cff","#f0883e","#ea6045",
-        "#1f6feb","#238636","#8957e5","#9e6a03","#da3633",
-      ];
-      const typeColor = (() => {
-        const map = {}; let i = 0;
-        return type => { if (!map[type]) map[type] = PALETTE[i++ % PALETTE.length]; return map[type]; };
-      })();
+        const PALETTE = [
+          "#58a6ff", "#3fb950", "#d2a8ff", "#ffa657", "#ff7b72",
+          "#79c0ff", "#56d364", "#bc8cff", "#f0883e", "#ea6045",
+          "#1f6feb", "#238636", "#8957e5", "#9e6a03", "#da3633",
+        ];
+        const typeColor = (() => {
+          const map = {};
+          let i = 0;
+          return type => {
+            if (!map[type]) map[type] = PALETTE[i++ % PALETTE.length];
+            return map[type];
+          };
+        })();
+        const HUB_DEGREE = 18;
+        const AUTO_LABEL_MIN_SIZE = 15;
 
-      setProgress(5, "Fetching graph data…");
-      let raw;
-      try {
-        const res = await fetch("/graph-data?max_entities=450&max_nodes=1400&max_edges=2200");
-        raw = await res.json();
-        if (!res.ok) throw new Error(raw.detail || "HTTP " + res.status);
-      } catch (err) { showError(err.message); return; }
-
-      setProgress(30, "Building graph…");
-
-      const graph = new graphology.Graph({ multi: false, allowSelfLoops: false });
-
-      const randomOrganicInit = graphRef => {
-        graphRef.forEachNode(node => {
-          // Box-Muller transform for a soft Gaussian cloud instead of a rigid grid/ring.
-          const u1 = Math.max(1e-7, Math.random());
-          const u2 = Math.random();
-          const r = Math.sqrt(-2 * Math.log(u1));
-          const theta = 2 * Math.PI * u2;
-          graphRef.setNodeAttribute(node, "x", r * Math.cos(theta));
-          graphRef.setNodeAttribute(node, "y", r * Math.sin(theta));
-        });
-      };
-
-      for (const n of raw.nodes) {
-        const entityType = n.group ?? n.type ?? "entity";
-        const color = typeColor(entityType);
-        const size  = Math.max(4, Math.min(18, 4 + (n.size ?? 1) * 0.6));
-        graph.addNode(String(n.id), {
-          label: n.label ?? String(n.id),
-          size, color, entityType,
-          x: Math.random(), y: Math.random(),
-        });
-      }
-
-      for (const e of raw.edges) {
-        const from = String(e.from ?? e.source);
-        const to   = String(e.to   ?? e.target);
-        if (from === to) continue;
-        if (!graph.hasNode(from) || !graph.hasNode(to)) continue;
-        const eid = `${from}->${to}`;
-        if (!graph.hasEdge(eid)) {
-          graph.addEdgeWithKey(eid, from, to, {
-            label: e.label ?? "",
-            size: 1,
-            color: "rgba(51,65,85,0.48)",
+        const spreadByType = graphRef => {
+          const grouped = new Map();
+          graphRef.forEachNode((node, attrs) => {
+            const type = attrs.entityType || "entity";
+            if (!grouped.has(type)) grouped.set(type, []);
+            grouped.get(type).push(node);
           });
-        }
-      }
 
-      randomOrganicInit(graph);
+          const orderedTypes = [...grouped.entries()]
+            .sort((a, b) => b[1].length - a[1].length)
+            .map(([type]) => type);
+          if (orderedTypes.length < 2) return;
 
-      setProgress(55, "Running layout…");
-      const fa2 = window.graphologyLayoutForceatlas2 || window.GraphologyLayoutForceatlas2;
-      if (fa2 && typeof fa2.assign === "function") {
-        fa2.assign(graph, {
-          iterations: 380,
-          settings: {
-            adjustSizes: true,
-            linLogMode: true,
-            gravity: 0.08,
-            scalingRatio: 24,
-            slowDown: 2.2,
-            barnesHutOptimize: true,
-            barnesHutTheta: 0.7,
-          },
-        });
-      }
+          const anchors = new Map();
+          const radiusX = 14 + orderedTypes.length * 0.8;
+          const radiusY = 10 + orderedTypes.length * 0.62;
 
-      graph.forEachNode((node, attrs) => {
-        const deg = graph.degree(node);
-        const boosted = Math.min(22, 3.5 + Math.sqrt(deg + 1) * 1.7);
-        graph.setNodeAttribute(node, "size", Math.max(attrs.size || 4, boosted));
-      });
+          orderedTypes.forEach((type, index) => {
+            const angle = (index / orderedTypes.length) * Math.PI * 2 - Math.PI / 2;
+            anchors.set(type, {
+              x: Math.cos(angle) * radiusX,
+              y: Math.sin(angle) * radiusY,
+            });
+          });
 
-      setProgress(80, "Rendering…");
+          graphRef.forEachNode((node, attrs) => {
+            const degree = graphRef.degree(node);
+            const anchor = anchors.get(attrs.entityType || "entity");
+            if (!anchor) return;
 
-      const renderer = new Sigma(graph, $("sigma-container"), {
-        renderEdgeLabels: false,
-        defaultEdgeColor: "rgba(51,65,85,0.45)",
-        defaultNodeColor: "#58a6ff",
-        labelFont: "DM Sans",
-        labelSize: 13,
-        labelColor: { color: "#1f2937" },
-        labelWeight: "600",
-        labelThreshold: 9,
-        hideEdgesOnMove: true,
-        hideLabelsOnMove: true,
-        renderLabels: true,
-      });
+            const seed = hashString(`${attrs.entityType}:${node}`);
+            const angle = ((seed % 360) / 360) * Math.PI * 2;
+            const localRadius = degree >= HUB_DEGREE
+              ? 1.8
+              : 2.8 + Math.min(5.5, Math.sqrt(degree + 1) * 1.3);
+            const pull = degree >= HUB_DEGREE ? 0.22 : degree >= 8 ? 0.34 : 0.46;
 
-      setProgress(100, "Done");
-      setTimeout(() => $("loading").classList.add("hidden"), 300);
+            graphRef.setNodeAttribute(
+              node,
+              "x",
+              attrs.x * (1 - pull) + (anchor.x + Math.cos(angle) * localRadius) * pull
+            );
+            graphRef.setNodeAttribute(
+              node,
+              "y",
+              attrs.y * (1 - pull) + (anchor.y + Math.sin(angle) * localRadius) * pull
+            );
+          });
+        };
 
-      const buildMs = raw.meta?.build_ms;
-      const cached  = raw.meta?.cached;
-      $("stats").innerHTML = [
-        `<span class="pill">${graph.order.toLocaleString()} nodes</span>`,
-        `<span class="pill edges">${graph.size.toLocaleString()} edges</span>`,
-        buildMs != null ? `<span class="pill timing">${buildMs} ms</span>` : "",
-        cached  != null ? `<span class="pill cache">${cached ? "cached" : "fresh"}</span>` : "",
-      ].join("");
+        const renderDefaultDetails = () => {
+          $("detail-state").textContent = "Inspect";
+          $("detail-hint").textContent = "Hover or click a node";
+          $("detail-title").textContent = "Graph overview";
+          $("detail-subtitle").textContent = "The graph keeps all nodes and edges, but surfaces details only when you focus a node.";
+          $("detail-meta").innerHTML = [
+            `<span class="meta-chip">Less label overlap</span>`,
+            `<span class="meta-chip">Hub edges softened</span>`,
+          ].join("");
+          $("detail-body").innerHTML = `
+            <div class="detail-section">
+              <div class="detail-section-title">How To Read</div>
+              <div class="detail-line">Hover to preview a local neighborhood. Click to pin it. Search jumps to the first match and highlights all matches.</div>
+            </div>
+          `;
+        };
 
-      const typeMap = {};
-      const typeCounts = {};
-      graph.forEachNode((_, a) => {
-        typeMap[a.entityType] = a.color;
-        typeCounts[a.entityType] = (typeCounts[a.entityType] || 0) + 1;
-      });
-      const legEl = $("legend-items");
-      Object.entries(typeCounts)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 12)
-        .forEach(([type, count]) => {
-          const color = typeMap[type];
-          legEl.innerHTML += `<div class="leg-item"><div class="leg-dot" style="background:${color}"></div><span>${type} (${count})</span></div>`;
-        });
-
-      let hoveredNode = null;
-      let selectedNode = null;
-      let labelsOn = false;
-      let edgesOn = true;
-      let searchMatches = new Set();
-      const AUTO_LABEL_MIN_SIZE = 12;
-
-      const collectNeighborhood = node => {
-        if (!node) return new Set();
-        const set = new Set([node]);
-        graph.forEachNeighbor(node, n => set.add(n));
-        return set;
-      };
-
-      const updateReducers = () => {
-        const hoverSet = collectNeighborhood(hoveredNode);
-        const selectedSet = collectNeighborhood(selectedNode);
-        const hasSearch = searchMatches.size > 0;
-        const hasFocus = hoverSet.size > 0 || selectedSet.size > 0 || hasSearch;
-
-        renderer.setSetting("nodeReducer", (node, data) => {
-          const out = { ...data };
-          const inHover = hoverSet.has(node);
-          const inSelected = selectedSet.has(node);
-          const inSearch = searchMatches.has(node);
-          const active = !hasFocus || inHover || inSelected || inSearch;
-
-          if (!active) {
-            out.color = "rgba(125,133,144,0.18)";
-            out.label = "";
-            out.size = Math.max(2.8, (data.size || 4) * 0.55);
-            return out;
-          }
-
-          if (!labelsOn) {
-            const shouldAutoLabel = (data.size || 0) >= AUTO_LABEL_MIN_SIZE;
-            if (!shouldAutoLabel && !inHover && !inSelected && !inSearch) {
-              out.label = "";
-            }
-          }
-
-          if (inSearch) {
-            out.color = "#ffd166";
-            out.size = (data.size || 4) * 1.35;
-          }
-
-          if (inSelected) {
-            out.color = "#ff9f1c";
-            out.size = (out.size || data.size || 4) * 1.15;
-          }
-
-          if (hoveredNode === node) {
-            out.color = "#7ee787";
-            out.size = (out.size || data.size || 4) * 1.18;
-          }
-
-          return out;
-        });
-
-        renderer.setSetting("edgeReducer", (edge, data) => {
-          const out = { ...data };
-          if (!edgesOn) {
-            out.hidden = true;
-            return out;
-          }
-
-          const [source, target] = graph.extremities(edge);
-          const inHover = hoverSet.has(source) && hoverSet.has(target);
-          const inSelected = selectedSet.has(source) && selectedSet.has(target);
-          const inSearch = hasSearch && (searchMatches.has(source) || searchMatches.has(target));
-          const active = !hasFocus || inHover || inSelected || inSearch;
-
-          out.hidden = !active;
-          out.color = inSelected ? "rgba(255,159,28,0.55)" : inHover ? "rgba(37,99,235,0.45)" : "rgba(51,65,85,0.48)";
-          return out;
-        });
-
-        renderer.refresh();
-      };
-
-      renderer.on("enterNode", ({ node }) => {
-        hoveredNode = node;
-        updateReducers();
-      });
-      renderer.on("leaveNode", () => {
-        hoveredNode = null;
-        updateReducers();
-      });
-
-      renderer.on("clickNode", ({ node }) => {
-        selectedNode = selectedNode === node ? null : node;
-        updateReducers();
-      });
-
-      renderer.on("clickStage", () => {
-        selectedNode = null;
-        searchMatches = new Set();
-        $("search").value = "";
-        updateReducers();
-      });
-
-      $("search").addEventListener("input", e => {
-        const q = e.target.value.trim().toLowerCase();
-        if (!q) {
-          searchMatches = new Set();
-          updateReducers();
+        setProgress(5, "Fetching graph data...");
+        let raw;
+        try {
+          const res = await fetch("/graph-data?max_entities=450&max_nodes=1400&max_edges=2200");
+          raw = await res.json();
+          if (!res.ok) throw new Error(raw.detail || "HTTP " + res.status);
+        } catch (err) {
+          showError(err.message);
           return;
         }
-        let firstMatch = null;
-        const nextMatches = new Set();
-        graph.forEachNode((node, attrs) => {
-          const match = attrs.label.toLowerCase().includes(q);
-          if (match) nextMatches.add(node);
-          if (match && !firstMatch) firstMatch = node;
-        });
-        searchMatches = nextMatches;
-        updateReducers();
-        if (firstMatch) {
-          const { x, y } = graph.getNodeAttributes(firstMatch);
-          renderer.getCamera().animate({ x, y, ratio: 0.08 }, { duration: 500 });
+
+        setProgress(30, "Building graph...");
+
+        const graph = new graphology.Graph({ multi: false, allowSelfLoops: false });
+
+        const randomOrganicInit = graphRef => {
+          graphRef.forEachNode(node => {
+            const u1 = Math.max(1e-7, Math.random());
+            const u2 = Math.random();
+            const r = Math.sqrt(-2 * Math.log(u1));
+            const theta = 2 * Math.PI * u2;
+            graphRef.setNodeAttribute(node, "x", r * Math.cos(theta));
+            graphRef.setNodeAttribute(node, "y", r * Math.sin(theta));
+          });
+        };
+
+        for (const n of raw.nodes) {
+          const entityType = n.group ?? n.type ?? "entity";
+          const color = typeColor(entityType);
+          const size = Math.max(4, Math.min(18, 4 + (n.size ?? 1) * 0.6));
+          graph.addNode(String(n.id), {
+            label: n.label ?? String(n.id),
+            title: n.title ?? "",
+            size,
+            color,
+            entityType,
+            x: Math.random(),
+            y: Math.random(),
+          });
         }
-      });
 
-      $("btn-labels").addEventListener("click", () => {
-        labelsOn = !labelsOn;
-        $("btn-labels").classList.toggle("active", labelsOn);
+        for (const e of raw.edges) {
+          const from = String(e.from ?? e.source);
+          const to = String(e.to ?? e.target);
+          if (from === to) continue;
+          if (!graph.hasNode(from) || !graph.hasNode(to)) continue;
+          const eid = `${from}->${to}`;
+          if (!graph.hasEdge(eid)) {
+            graph.addEdgeWithKey(eid, from, to, {
+              label: e.label ?? "",
+              size: 1,
+              color: "rgba(51,65,85,0.28)",
+            });
+          }
+        }
+
+        randomOrganicInit(graph);
+
+        setProgress(55, "Running layout...");
+        const fa2 = window.graphologyLayoutForceatlas2 || window.GraphologyLayoutForceatlas2;
+        if (fa2 && typeof fa2.assign === "function") {
+          fa2.assign(graph, {
+            iterations: 480,
+            settings: {
+              adjustSizes: true,
+              linLogMode: true,
+              gravity: 0.06,
+              scalingRatio: 34,
+              slowDown: 2.8,
+              barnesHutOptimize: true,
+              barnesHutTheta: 0.7,
+            },
+          });
+        }
+        spreadByType(graph);
+
+        graph.forEachNode((node, attrs) => {
+          const deg = graph.degree(node);
+          const boosted = Math.min(20, 3.4 + Math.sqrt(deg + 1) * 1.45);
+          graph.setNodeAttribute(node, "degree", deg);
+          graph.setNodeAttribute(node, "size", Math.max(attrs.size || 4, boosted));
+        });
+
+        setProgress(80, "Rendering...");
+
+        const renderer = new Sigma(graph, $("sigma-container"), {
+          renderEdgeLabels: false,
+          defaultEdgeColor: "rgba(51,65,85,0.26)",
+          defaultNodeColor: "#58a6ff",
+          labelFont: "DM Sans",
+          labelSize: 12,
+          labelColor: { color: "#1f2937" },
+          labelWeight: "600",
+          labelThreshold: 10,
+          hideEdgesOnMove: true,
+          hideLabelsOnMove: true,
+          renderLabels: true,
+        });
+
+        setProgress(100, "Done");
+        setTimeout(() => $("loading").classList.add("hidden"), 300);
+
+        const buildMs = raw.meta?.build_ms;
+        const cached = raw.meta?.cached;
+        $("stats").innerHTML = [
+          `<span class="pill">${graph.order.toLocaleString()} nodes</span>`,
+          `<span class="pill edges">${graph.size.toLocaleString()} edges</span>`,
+          buildMs != null ? `<span class="pill timing">${buildMs} ms</span>` : "",
+          cached != null ? `<span class="pill cache">${cached ? "cached" : "fresh"}</span>` : "",
+        ].join("");
+
+        const typeMap = {};
+        const typeCounts = {};
+        graph.forEachNode((_, a) => {
+          typeMap[a.entityType] = a.color;
+          typeCounts[a.entityType] = (typeCounts[a.entityType] || 0) + 1;
+        });
+        const legEl = $("legend-items");
+        Object.entries(typeCounts)
+          .sort((a, b) => b[1] - a[1])
+          .slice(0, 12)
+          .forEach(([type, count]) => {
+            const color = typeMap[type];
+            legEl.innerHTML += `<div class="leg-item"><div class="leg-dot" style="background:${color}"></div><span>${escapeHtml(type)} (${count})</span></div>`;
+          });
+
+        let hoveredNode = null;
+        let selectedNode = null;
+        let labelsOn = false;
+        let edgesOn = true;
+        let searchMatches = new Set();
+
+        const collectNeighborhood = node => {
+          if (!node) return new Set();
+          const set = new Set([node]);
+          graph.forEachNeighbor(node, neighbor => set.add(neighbor));
+          return set;
+        };
+
+        const updateDetailPanel = () => {
+          const focusNode = selectedNode || hoveredNode;
+          $("detail-panel").classList.toggle("is-pinned", Boolean(selectedNode));
+
+          if (!focusNode) {
+            renderDefaultDetails();
+            return;
+          }
+
+          const attrs = graph.getNodeAttributes(focusNode);
+          const neighbors = [];
+          graph.forEachNeighbor(focusNode, neighbor => {
+            const neighborAttrs = graph.getNodeAttributes(neighbor);
+            neighbors.push({
+              label: neighborAttrs.label ?? String(neighbor),
+              entityType: neighborAttrs.entityType ?? "entity",
+            });
+          });
+          neighbors.sort((a, b) => a.label.localeCompare(b.label));
+
+          const titleLines = String(attrs.title || "")
+            .split(/\r?\n/)
+            .filter(Boolean)
+            .map(line => `<div class="detail-line">${escapeHtml(line)}</div>`)
+            .join("");
+
+          const preview = neighbors
+            .slice(0, 6)
+            .map(item => `
+              <div class="neighbor-item">
+                <span>${escapeHtml(item.label)}</span>
+                <span>${escapeHtml(item.entityType)}</span>
+              </div>
+            `)
+            .join("");
+
+          $("detail-state").textContent = selectedNode ? "Pinned" : "Hover";
+          $("detail-hint").textContent = selectedNode ? "Click the canvas to clear" : "Click to pin this node";
+          $("detail-title").textContent = attrs.label ?? String(focusNode);
+          $("detail-subtitle").textContent = `${attrs.entityType ?? "Entity"} - #${focusNode}`;
+          $("detail-meta").innerHTML = [
+            `<span class="meta-chip">${graph.degree(focusNode)} direct links</span>`,
+            `<span class="meta-chip">${neighbors.length ? "Neighborhood visible" : "Isolated in current graph"}</span>`,
+          ].join("");
+          $("detail-body").innerHTML = `
+            <div class="detail-section">
+              <div class="detail-section-title">Entity</div>
+              ${titleLines || `<div class="detail-line">No additional metadata available.</div>`}
+            </div>
+            <div class="detail-section">
+              <div class="detail-section-title">Connected Nodes</div>
+              ${preview ? `<div class="neighbor-list">${preview}</div>` : `<div class="detail-line">No connected nodes in the current view.</div>`}
+              ${neighbors.length > 6 ? `<div class="detail-line">+${neighbors.length - 6} more connected nodes</div>` : ``}
+            </div>
+          `;
+        };
+
+        const updateReducers = () => {
+          const hoverSet = collectNeighborhood(hoveredNode);
+          const selectedSet = collectNeighborhood(selectedNode);
+          const hasSearch = searchMatches.size > 0;
+          const hasFocus = hoverSet.size > 0 || selectedSet.size > 0 || hasSearch;
+
+          renderer.setSetting("nodeReducer", (node, data) => {
+            const out = { ...data };
+            const inHover = hoverSet.has(node);
+            const inSelected = selectedSet.has(node);
+            const inSearch = searchMatches.has(node);
+            const active = !hasFocus || inHover || inSelected || inSearch;
+
+            if (!active) {
+              out.color = "rgba(125,133,144,0.18)";
+              out.label = "";
+              out.size = Math.max(2.8, (data.size || 4) * 0.55);
+              return out;
+            }
+
+            if (!labelsOn) {
+              const shouldAutoLabel = (data.size || 0) >= AUTO_LABEL_MIN_SIZE || (data.degree || 0) >= HUB_DEGREE;
+              if (!shouldAutoLabel && !inHover && !inSelected && !inSearch) {
+                out.label = "";
+              }
+            }
+
+            if (inSearch) {
+              out.color = "#ffd166";
+              out.size = (data.size || 4) * 1.35;
+            }
+
+            if (inSelected) {
+              out.color = "#ff9f1c";
+              out.size = (out.size || data.size || 4) * 1.15;
+            }
+
+            if (hoveredNode === node) {
+              out.color = "#7ee787";
+              out.size = (out.size || data.size || 4) * 1.18;
+            }
+
+            return out;
+          });
+
+          renderer.setSetting("edgeReducer", (edge, data) => {
+            const out = { ...data };
+            if (!edgesOn) {
+              out.hidden = true;
+              return out;
+            }
+
+            const [source, target] = graph.extremities(edge);
+            const sourceDegree = graph.getNodeAttribute(source, "degree") || 0;
+            const targetDegree = graph.getNodeAttribute(target, "degree") || 0;
+            const maxDegree = Math.max(sourceDegree, targetDegree);
+            const inHover = hoverSet.has(source) && hoverSet.has(target);
+            const inSelected = selectedSet.has(source) && selectedSet.has(target);
+            const inSearch = hasSearch && (searchMatches.has(source) || searchMatches.has(target));
+            const active = !hasFocus || inHover || inSelected || inSearch;
+
+            out.hidden = !active;
+            out.size = inSelected || inHover ? 1.7 : maxDegree >= HUB_DEGREE ? 0.45 : maxDegree >= 8 ? 0.7 : 0.9;
+            out.color = inSelected
+              ? "rgba(255,159,28,0.55)"
+              : inHover
+                ? "rgba(37,99,235,0.42)"
+                : maxDegree >= HUB_DEGREE
+                  ? "rgba(51,65,85,0.10)"
+                  : maxDegree >= 8
+                    ? "rgba(51,65,85,0.18)"
+                    : "rgba(51,65,85,0.28)";
+            return out;
+          });
+
+          updateDetailPanel();
+          renderer.refresh();
+        };
+
+        renderer.on("enterNode", ({ node }) => {
+          hoveredNode = node;
+          updateReducers();
+        });
+
+        renderer.on("leaveNode", () => {
+          hoveredNode = null;
+          updateReducers();
+        });
+
+        renderer.on("clickNode", ({ node }) => {
+          selectedNode = selectedNode === node ? null : node;
+          if (selectedNode) {
+            const { x, y } = graph.getNodeAttributes(selectedNode);
+            renderer.getCamera().animate({ x, y, ratio: 0.12 }, { duration: 350 });
+          }
+          updateReducers();
+        });
+
+        renderer.on("clickStage", () => {
+          selectedNode = null;
+          searchMatches = new Set();
+          $("search").value = "";
+          updateReducers();
+        });
+
+        $("search").addEventListener("input", event => {
+          const q = event.target.value.trim().toLowerCase();
+          if (!q) {
+            searchMatches = new Set();
+            updateReducers();
+            return;
+          }
+
+          let firstMatch = null;
+          const nextMatches = new Set();
+          graph.forEachNode((node, attrs) => {
+            const match = attrs.label.toLowerCase().includes(q);
+            if (match) nextMatches.add(node);
+            if (match && !firstMatch) firstMatch = node;
+          });
+
+          searchMatches = nextMatches;
+          updateReducers();
+
+          if (firstMatch) {
+            const { x, y } = graph.getNodeAttributes(firstMatch);
+            renderer.getCamera().animate({ x, y, ratio: 0.08 }, { duration: 500 });
+          }
+        });
+
+        $("btn-labels").addEventListener("click", () => {
+          labelsOn = !labelsOn;
+          $("btn-labels").classList.toggle("active", labelsOn);
+          updateReducers();
+        });
+
+        $("btn-edges").addEventListener("click", () => {
+          edgesOn = !edgesOn;
+          $("btn-edges").classList.toggle("active", edgesOn);
+          updateReducers();
+        });
+
+        $("btn-fit").addEventListener("click", () => {
+          selectedNode = null;
+          hoveredNode = null;
+          searchMatches = new Set();
+          $("search").value = "";
+          renderer.getCamera().animatedReset({ duration: 400 });
+          updateReducers();
+        });
+
+        $("zoom-in").addEventListener("click", () => renderer.getCamera().animatedZoom({ duration: 300 }));
+        $("zoom-out").addEventListener("click", () => renderer.getCamera().animatedUnzoom({ duration: 300 }));
+        $("zoom-reset").addEventListener("click", () => renderer.getCamera().animatedReset({ duration: 400 }));
+
+        renderDefaultDetails();
         updateReducers();
-      });
-
-      $("btn-edges").addEventListener("click", () => {
-        edgesOn = !edgesOn;
-        $("btn-edges").classList.toggle("active", edgesOn);
-        updateReducers();
-      });
-
-      $("btn-fit").addEventListener("click",    () => {
-        selectedNode = null;
-        hoveredNode = null;
-        searchMatches = new Set();
-        $("search").value = "";
-        renderer.getCamera().animatedReset({ duration: 400 });
-        updateReducers();
-      });
-      $("zoom-in").addEventListener("click",    () => renderer.getCamera().animatedZoom({ duration: 300 }));
-      $("zoom-out").addEventListener("click",   () => renderer.getCamera().animatedUnzoom({ duration: 300 }));
-      $("zoom-reset").addEventListener("click", () => renderer.getCamera().animatedReset({ duration: 400 }));
-
-      updateReducers();
-    })();
+      })();
     </script>
   </body>
 </html>
