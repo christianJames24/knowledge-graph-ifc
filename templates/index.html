@@ -11,12 +11,12 @@
     />
     <style>
       :root {
-        --bg: #0d1117;
-        --surface: #161b22;
-        --surface-2: #21262d;
-        --border: rgba(255,255,255,0.08);
-        --ink: #e6edf3;
-        --ink-muted: #7d8590;
+        --bg: #f3f6fb;
+        --surface: #ffffff;
+        --surface-2: #e8eef7;
+        --border: rgba(15,23,42,0.12);
+        --ink: #1f2937;
+        --ink-muted: #64748b;
         --accent: #58a6ff;
         --accent-2: #3fb950;
         --accent-3: #d2a8ff;
@@ -125,25 +125,6 @@
       #loading-msg { font-family: "IBM Plex Mono", monospace; font-size: 0.8rem; color: var(--ink-muted); }
       #loading-bar-wrap { width: 220px; height: 3px; background: var(--surface-2); border-radius: 99px; overflow: hidden; }
       #loading-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-radius: 99px; transition: width 300ms ease; }
-      #tooltip {
-        position: absolute;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 0.55rem 0.8rem;
-        font-size: 0.8rem;
-        pointer-events: none;
-        opacity: 0;
-        transform: translateY(4px);
-        transition: opacity 150ms, transform 150ms;
-        max-width: 260px;
-        z-index: 20;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-      }
-      #tooltip.visible { opacity: 1; transform: translateY(0); }
-      #tooltip .tt-label { font-weight: 700; color: var(--ink); margin-bottom: 0.25rem; word-break: break-word; }
-      #tooltip .tt-type { font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; color: var(--accent); }
-      #tooltip .tt-degree { font-size: 0.72rem; color: var(--ink-muted); margin-top: 0.2rem; }
       #legend {
         position: absolute; bottom: 1rem; left: 1rem;
         background: var(--surface);
@@ -202,11 +183,6 @@
         <div id="loading-bar-wrap"><div id="loading-bar"></div></div>
       </div>
       <div id="error-msg"><span>✕</span><span id="error-text">Could not load graph data.</span></div>
-      <div id="tooltip">
-        <div class="tt-label" id="tt-label"></div>
-        <div class="tt-type" id="tt-type"></div>
-        <div class="tt-degree" id="tt-degree"></div>
-      </div>
       <div id="legend">
         <div class="leg-title">Node Types</div>
         <div id="legend-items"></div>
@@ -291,7 +267,7 @@
           graph.addEdgeWithKey(eid, from, to, {
             label: e.label ?? "",
             size: 1,
-            color: "rgba(125,133,144,0.3)",
+            color: "rgba(51,65,85,0.48)",
           });
         }
       }
@@ -325,11 +301,11 @@
 
       const renderer = new Sigma(graph, $("sigma-container"), {
         renderEdgeLabels: false,
-        defaultEdgeColor: "rgba(125,133,144,0.22)",
+        defaultEdgeColor: "rgba(51,65,85,0.45)",
         defaultNodeColor: "#58a6ff",
         labelFont: "DM Sans",
         labelSize: 13,
-        labelColor: { color: "#e6edf3" },
+        labelColor: { color: "#1f2937" },
         labelWeight: "600",
         labelThreshold: 9,
         hideEdgesOnMove: true,
@@ -437,32 +413,21 @@
           const active = !hasFocus || inHover || inSelected || inSearch;
 
           out.hidden = !active;
-          out.color = inSelected ? "rgba(255,159,28,0.45)" : inHover ? "rgba(126,231,135,0.42)" : "rgba(125,133,144,0.28)";
+          out.color = inSelected ? "rgba(255,159,28,0.55)" : inHover ? "rgba(37,99,235,0.45)" : "rgba(51,65,85,0.48)";
           return out;
         });
 
         renderer.refresh();
       };
 
-      const tooltip = $("tooltip");
-      renderer.on("enterNode", ({ node, event }) => {
+      renderer.on("enterNode", ({ node }) => {
         hoveredNode = node;
         updateReducers();
-        const a = graph.getNodeAttributes(node);
-        const deg = graph.degree(node);
-        $("tt-label").textContent = a.label;
-        $("tt-type").textContent  = a.entityType ?? "";
-        $("tt-degree").textContent = `${deg} connection${deg !== 1 ? "s" : ""}`;
-        tooltip.style.left = (event.x + 14) + "px";
-        tooltip.style.top  = (event.y + 14) + "px";
-        tooltip.classList.add("visible");
       });
       renderer.on("leaveNode", () => {
         hoveredNode = null;
         updateReducers();
-        tooltip.classList.remove("visible");
       });
-      renderer.on("moveBody", () => tooltip.classList.remove("visible"));
 
       renderer.on("clickNode", ({ node }) => {
         selectedNode = selectedNode === node ? null : node;
