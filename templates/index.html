@@ -667,7 +667,7 @@
             graph.addEdgeWithKey(eid, from, to, {
               label: e.label ?? "",
               size: 1,
-              color: "rgba(51,65,85,0.28)",
+              color: "#9a9a9a",
             });
           }
         }
@@ -703,13 +703,15 @@
 
         const renderer = new Sigma(graph, $("sigma-container"), {
           renderEdgeLabels: false,
-          defaultEdgeColor: "rgba(51,65,85,0.26)",
+          defaultEdgeColor: "#9a9a9a",
           defaultNodeColor: "#58a6ff",
           labelFont: "DM Sans",
           labelSize: 12,
           labelColor: { color: "#1f2937" },
           labelWeight: "600",
           labelThreshold: 10,
+          minEdgeThickness: 2.2,
+          antiAliasingFeather: 0.5,
           hideEdgesOnMove: true,
           hideLabelsOnMove: true,
           renderLabels: true,
@@ -888,10 +890,10 @@
               : inHover
                 ? "rgba(37,99,235,0.42)"
                 : maxDegree >= HUB_DEGREE
-                  ? "rgba(51,65,85,0.10)"
+                  ? "#c3c3c3"
                   : maxDegree >= 8
-                    ? "rgba(51,65,85,0.18)"
-                    : "rgba(51,65,85,0.28)";
+                    ? "#adadad"
+                    : "#9a9a9a";
             return out;
           });
 
